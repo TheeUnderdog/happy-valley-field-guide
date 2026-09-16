@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valley Field Guide</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
-<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
 <script>
   (() => {
     const param = new URLSearchParams(window.location.search).get("scoutTheme");
@@ -114,8 +111,8 @@ button.tag:hover, button.tag.active { background: var(--cp-accent-soft); color: 
 .map-shell, .calendar-shell { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 18px; box-shadow: var(--cp-shadow); }
 .map-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 16px; }
 .map-canvas { width: 100%; min-height: 560px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-bg-elevated); overflow: hidden; }
-.leaflet-container { background: var(--cp-bg-elevated); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
-.leaflet-control-attribution { background: var(--cp-panel-strong); color: var(--cp-text-muted); }
+.maplibregl-map { font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+.maplibregl-ctrl-attrib { background: var(--cp-panel-strong); color: var(--cp-text-muted); }
 .cluster-marker, .entry-marker { display: grid; place-items: center; border-radius: 999px; border: 2px solid var(--cp-surface); background: var(--cp-accent); color: var(--cp-accent-fg); box-shadow: var(--cp-shadow); font-weight: 700; cursor: pointer; }
 .cluster-marker { width: 38px; height: 38px; }
 .entry-marker { width: 16px; height: 16px; }
@@ -147,8 +144,8 @@ let activeType = '';
 let activeTown = '';
 let viewMode = 'cards';
 let expandedMapTown = '';
-let leafletMap = null;
-let leafletLayer = null;
+let guideMap = null;
+let mapMarkers = [];
 function renderTagOptions() {
   const options = byId('tagOptions');
   options.innerHTML = unique(DATA.flatMap(x=>x.tags || [])).map(tag => `<button type="button" class="filter-chip ${selectedTags.has(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}" aria-pressed="${selectedTags.has(tag)}">${escapeHtml(tag)}</button>`).join('');
@@ -206,13 +203,10 @@ function renderMap(rowsForPins, rows) {
   }
   const townRows = [...grouped.entries()].sort((a,b)=>b[1].length-a[1].length || a[0].localeCompare(b[0])).map(([town, items]) => `<button type="button" class="town-row ${town===expandedMapTown?'active':''}" data-town="${escapeHtml(town)}"><strong>${escapeHtml(town)}</strong><br>${items.length} matching entries</button>`).join('');
   const expandedText = expandedMapTown ? `<button type="button" class="filter-chip active" id="resetMap">Reset map ×</button><span class="details">Expanded: ${escapeHtml(expandedMapTown)}</span>` : `<span class="details">Click a numbered cluster to zoom in and expand it into individual entry points.</span>`;
-  byId('mapContent').innerHTML = `<div class="map-layout"><div><div class="map-actions">${expandedText}</div><div id="leafletMap" class="map-canvas"></div></div><div class="map-side"><div class="details">${rows.length} entries shown. Map markers are approximate town/entry locations.</div>${townRows}</div></div>`;
-  requestAnimationFrame(() => drawLeafletMap(grouped));
+  byId('mapContent').innerHTML = `<div class="map-layout"><div><div class="map-actions">${expandedText}</div><div id="guideMap" class="map-canvas"></div></div><div class="map-side"><div class="details">${rows.length} entries shown. Map markers are approximate town/entry locations.</div>${townRows}</div></div>`;
+  requestAnimationFrame(() => drawGuideMap(grouped));
   const reset = byId('resetMap');
   if (reset) reset.addEventListener('click', () => { expandedMapTown = ''; activeTown = ''; render(); });
-}
-function markerHtml(count, expanded=false) {
-  return `<div class="cluster-marker ${expanded ? 'is-expanded' : ''}">${count}</div>`;
 }
 function entryCoord(center, index, total) {
   if (total <= 1) return center;
@@ -220,59 +214,58 @@ function entryCoord(center, index, total) {
   const ring = 0.006 + Math.floor(index / 10) * 0.004;
   return [center[0] + Math.sin(angle) * ring, center[1] + Math.cos(angle) * ring];
 }
-function drawLeafletMap(grouped) {
-  if (typeof L === 'undefined') {
-    byId('leafletMap').innerHTML = '<p class="details">The map library did not load. Publish the site folder through a static web host and reload the page.</p>';
+function lngLat(coord) {
+  return [coord[1], coord[0]];
+}
+function addMarker(coord, element, popupHtml) {
+  const marker = new maplibregl.Marker({ element }).setLngLat(lngLat(coord)).addTo(guideMap);
+  if (popupHtml) marker.setPopup(new maplibregl.Popup({ offset: 16 }).setHTML(popupHtml));
+  mapMarkers.push(marker);
+  return marker;
+}
+function drawGuideMap(grouped) {
+  if (typeof maplibregl === 'undefined') {
+    byId('guideMap').innerHTML = '<p class="details">The map library did not load. Publish the site folder through a static web host and reload the page.</p>';
     return;
   }
-  if (leafletMap) {
-    leafletMap.remove();
-    leafletMap = null;
+  if (guideMap) {
+    guideMap.remove();
+    guideMap = null;
   }
-  leafletMap = L.map('leafletMap', { scrollWheelZoom: true }).setView([35.914, -81.539], 8);
-  if (typeof L.maplibreGL === 'function') {
-    L.maplibreGL({
-      style: 'https://tiles.openfreemap.org/styles/liberty',
-      attribution: '<a href="https://openfreemap.org/">OpenFreeMap</a> &copy; <a href="https://www.openmaptiles.org/">OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(leafletMap);
-  } else {
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-      subdomains: 'abc',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/">HOT</a>'
-    }).addTo(leafletMap);
-  }
-  leafletLayer = L.layerGroup().addTo(leafletMap);
-  const allLatLngs = [];
+  mapMarkers = [];
+  guideMap = new maplibregl.Map({
+    container: 'guideMap',
+    style: 'https://tiles.openfreemap.org/styles/liberty',
+    center: [-81.539, 35.914],
+    zoom: 8,
+    attributionControl: true
+  });
+  const bounds = new maplibregl.LngLatBounds();
   for (const [town, items] of grouped.entries()) {
     const center = TOWN_COORDS[town];
     if (!center) continue;
     if (expandedMapTown === town) {
       items.forEach((entry, index) => {
         const coord = entryCoord(center, index, items.length);
-        allLatLngs.push(coord);
-        const marker = L.marker(coord, {
-          title: entry.title,
-          icon: L.divIcon({ className: '', html: '<div class="entry-marker"></div>', iconSize: [16,16], iconAnchor: [8,8] })
-        }).addTo(leafletLayer);
-        marker.bindPopup(`<strong>${escapeHtml(entry.title)}</strong><br>${escapeHtml(entry.type)} · ${escapeHtml(entry.town)}<br>${escapeHtml(entry.timing || formatDateRange(entry.date_start, entry.date_end) || '')}`);
+        bounds.extend(lngLat(coord));
+        const element = document.createElement('div');
+        element.className = 'entry-marker';
+        element.title = entry.title;
+        addMarker(coord, element, `<strong>${escapeHtml(entry.title)}</strong><br>${escapeHtml(entry.type)} · ${escapeHtml(entry.town)}<br>${escapeHtml(entry.timing || formatDateRange(entry.date_start, entry.date_end) || '')}`);
       });
     } else {
-      allLatLngs.push(center);
-      const marker = L.marker(center, {
-        title: town,
-        icon: L.divIcon({ className: '', html: markerHtml(items.length, false), iconSize: [38,38], iconAnchor: [19,19] })
-      }).addTo(leafletLayer);
-      marker.on('click', () => { expandedMapTown = town; activeTown = town; render(); });
+      bounds.extend(lngLat(center));
+      const element = document.createElement('button');
+      element.type = 'button';
+      element.className = `cluster-marker ${town === expandedMapTown ? 'is-expanded' : ''}`;
+      element.textContent = String(items.length);
+      element.title = town;
+      element.setAttribute('aria-label', `${town}, ${items.length} entries`);
+      element.addEventListener('click', () => { expandedMapTown = town; activeTown = town; render(); });
+      addMarker(center, element);
     }
   }
-  if (expandedMapTown && TOWN_COORDS[expandedMapTown]) {
-    leafletMap.setView(TOWN_COORDS[expandedMapTown], 12);
-  } else if (allLatLngs.length === 1) {
-    leafletMap.setView(allLatLngs[0], 11);
-  } else {
-    leafletMap.fitBounds(L.latLngBounds(allLatLngs), { padding: [28, 28] });
-  }
+  if (!bounds.isEmpty()) guideMap.fitBounds(bounds, { padding: 28, maxZoom: expandedMapTown ? 12 : 11 });
 }
 function monthName(value) {
   const date = new Date(`${value}T00:00:00`);
