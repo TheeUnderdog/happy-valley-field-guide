@@ -1,6 +1,15 @@
 name: Build site
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "content/**"
+      - "scripts/**"
+      - "taxonomy/**"
+      - "README.md"
+      - ".github/workflows/build-site.yml"
   push:
     branches:
       - main
@@ -17,7 +26,6 @@ permissions:
 
 jobs:
   build:
-    if: github.actor != 'github-actions[bot]' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +34,16 @@ jobs:
           python-version: "3.x"
       - name: Generate static site
         run: python scripts/generate-html.py
+      - name: Validate generated site on pull requests
+        if: github.event_name == 'pull_request'
+        run: |
+          if ! git diff --quiet -- index.html site/index.html; then
+            echo "::error::Generated HTML is out of date. Run python scripts/generate-html.py and commit index.html and site/index.html."
+            git diff -- index.html site/index.html
+            exit 1
+          fi
       - name: Commit generated site
+        if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
         run: |
           if ! git diff --quiet -- index.html site/index.html; then
             git config user.name "github-actions[bot]"

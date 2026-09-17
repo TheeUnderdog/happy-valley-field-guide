@@ -173,18 +173,15 @@ h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.04em
 .tab, .view-button { appearance: none; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); color: var(--cp-text-muted); border-radius: 0.625rem; padding: 9px 14px; font: inherit; cursor: pointer; }
 .tab strong { color: var(--cp-text); margin-left: 6px; }
 .tab:hover, .tab.active, .view-button:hover, .view-button.active { border-color: var(--cp-accent); background: var(--cp-accent-soft); color: var(--cp-accent); }
-.tab:focus-visible, .view-button:focus-visible, .filter-chip:focus-visible, .tag:focus-visible, .town-pin:focus-visible { outline: 2px solid var(--cp-accent); outline-offset: 2px; }
+.tab:focus-visible, .view-button:focus-visible, .filter-chip:focus-visible, .town-pin:focus-visible { outline: 2px solid var(--cp-accent); outline-offset: 2px; }
 .controls { position: sticky; top: 0; z-index: 2; background: var(--cp-panel-strong); border-bottom: 1px solid var(--cp-border); padding: 16px 24px; }
 .control-grid { display: grid; grid-template-columns: minmax(240px, 1fr) auto; gap: 12px; align-items: center; }
 input, select { width: 100%; border: 1px solid var(--cp-border); border-radius: 0.625rem; padding: 10px 12px; background: var(--cp-surface); color: var(--cp-text); font: inherit; }
 .view-switch { display: inline-flex; gap: 6px; justify-self: end; }
-.tag-panel { margin-top: 12px; display: grid; gap: 8px; }
-.tag-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--cp-text-muted); font-size: 13px; }
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .filter-chip { appearance: none; border: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text-muted); border-radius: 999px; padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; }
 .filter-chip:hover, .filter-chip.active { background: var(--cp-accent-soft); color: var(--cp-accent); border-color: var(--cp-accent); }
 .filter-chip.clear { color: var(--cp-text-muted); }
-.active-filter { display: none; align-items: center; gap: 8px; color: var(--cp-text-muted); }
+.active-filter { display: none; align-items: center; gap: 8px; color: var(--cp-text-muted); margin-top: 12px; }
 .active-filter.show { display: flex; }
 main { padding: 24px; }
 .meta-line { display: flex; justify-content: space-between; gap: 16px; color: var(--cp-text-muted); margin-bottom: 16px; }
@@ -194,13 +191,10 @@ main { padding: 24px; }
 .card { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 18px; box-shadow: var(--cp-shadow); display: flex; flex-direction: column; gap: 10px; }
 .card h2 { margin: 0; font-size: 20px; }
 .kicker { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--cp-text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
-.badge, .tag { display: inline-flex; align-items: center; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); border-radius: 999px; padding: 4px 8px; font-size: 12px; color: var(--cp-text-muted); }
-button.tag { cursor: pointer; font: inherit; }
-button.tag:hover, button.tag.active { background: var(--cp-accent-soft); color: var(--cp-accent); border-color: var(--cp-accent); }
+.badge { display: inline-flex; align-items: center; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); border-radius: 999px; padding: 4px 8px; font-size: 12px; color: var(--cp-text-muted); }
 .badge.strong { background: var(--cp-accent-soft); color: var(--cp-accent); border-color: var(--cp-border-strong); }
 .desc { color: var(--cp-text); line-height: 1.45; }
 .details { color: var(--cp-text-muted); font-size: 13px; line-height: 1.45; }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .sources { font-size: 12px; color: var(--cp-text-muted); }
 .map-shell, .calendar-shell { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 18px; box-shadow: var(--cp-shadow); }
 .map-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 16px; }
@@ -224,7 +218,7 @@ footer { padding: 24px; color: var(--cp-text-muted); border-top: 1px solid var(-
 </head>
 <body>
 <header><div class="wrap"><h1>Happy Valley Field Guide</h1><div class="subtitle">A Markdown-first acclimation guide for the Lenoir region: towns, events, places, fairs, art, music, outdoors, cars, tractors, horses, and seasonal day trips.</div><nav class="tabs" aria-label="Content type"><button class="tab active" type="button" data-type-tab="" aria-pressed="true">All <strong>__TOTAL__</strong></button><button class="tab" type="button" data-type-tab="event" aria-pressed="false">Events <strong>__EVENTS__</strong></button><button class="tab" type="button" data-type-tab="place" aria-pressed="false">Places <strong>__PLACES__</strong></button></nav></div></header>
-<section class="controls"><div class="wrap"><div class="control-grid"><input id="q" placeholder="Search title, town, tags, description"><div class="view-switch" aria-label="View mode"><button class="view-button active" type="button" data-view="cards" aria-pressed="true">Cards</button><button class="view-button" type="button" data-view="map" aria-pressed="false">Map</button><button class="view-button" type="button" data-view="calendar" aria-pressed="false">Calendar</button></div></div><div class="tag-panel"><div class="tag-panel-head"><strong>Tags: select one or more</strong><button id="clearTags" class="filter-chip clear" type="button">Clear tags</button></div><div id="activeTown" class="active-filter"></div><div id="selectedTags" class="chip-row"></div><div id="tagOptions" class="chip-row"></div></div></div></section>
+<section class="controls"><div class="wrap"><div class="control-grid"><input id="q" placeholder="Search title, town, tags, description"><div class="view-switch" aria-label="View mode"><button class="view-button active" type="button" data-view="cards" aria-pressed="true">Cards</button><button class="view-button" type="button" data-view="map" aria-pressed="false">Map</button><button class="view-button" type="button" data-view="calendar" aria-pressed="false">Calendar</button></div></div><div id="activeTown" class="active-filter"></div></div></section>
 <main><div class="wrap"><div class="meta-line"><div id="count"></div><div>Source: <code>content/&lt;town&gt;/*.md</code></div></div><section id="cardsView" class="view-section active"><div id="cards" class="grid"></div></section><section id="mapView" class="view-section"><div id="mapContent" class="map-shell"></div></section><section id="calendarView" class="view-section"><div id="calendarContent" class="calendar-shell"></div></section></div></main>
 <footer><div class="wrap">Generated locally from Markdown. Items marked expected, confirmed-pattern, or needs-confirmation should be checked before planning.</div></footer>
 <script>
@@ -232,19 +226,12 @@ const DATA = __DATA__;
 const TOWN_COORDS = __COORDS__;
 const byId = id => document.getElementById(id);
 const escapeHtml = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const unique = arr => [...new Set(arr.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
-const selectedTags = new Set();
 let activeType = '';
 let activeTown = '';
 let viewMode = 'cards';
 let expandedMapTown = '';
 let guideMap = null;
 let mapMarkers = [];
-function renderTagOptions() {
-  const options = byId('tagOptions');
-  options.innerHTML = unique(DATA.flatMap(x=>x.tags || [])).map(tag => `<button type="button" class="filter-chip ${selectedTags.has(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}" aria-pressed="${selectedTags.has(tag)}">${escapeHtml(tag)}</button>`).join('');
-  byId('selectedTags').innerHTML = [...selectedTags].map(tag => `<button type="button" class="filter-chip active" data-tag="${escapeHtml(tag)}" aria-pressed="true">${escapeHtml(tag)} ×</button>`).join('');
-}
 function updateTabs() {
   document.querySelectorAll('[data-type-tab]').forEach(button => {
     const active = button.dataset.typeTab === activeType;
@@ -278,11 +265,11 @@ function renderActiveTown() {
 function card(e) {
   const date = formatDateRange(e.date_start, e.date_end);
   const sourceLinks = (e.source_urls || []).slice(0,3).map((s,i)=>`<a href="${escapeHtml(s)}">source ${i+1}</a>`).join(' · ');
-  return `<article class="card"><div class="kicker"><span class="badge strong">${escapeHtml(e.type)}</span><span class="badge">${escapeHtml(e.town)}</span><span class="badge">${escapeHtml(e.status)}</span>${e.scope && e.scope !== 'core' ? `<span class="badge">${escapeHtml(e.scope)}</span>` : ''}</div><h2>${escapeHtml(e.title)}</h2><div class="details">${date ? `<strong>${escapeHtml(date)}</strong><br>` : ''}${escapeHtml(e.timing || e.time || 'Year-round / see details')}<br>${escapeHtml(e.address || '')}</div><div class="desc">${escapeHtml(e.description_short || e.body_preview || '')}</div><div class="tags">${(e.tags||[]).map(t=>`<button type="button" class="tag ${selectedTags.has(t) ? 'active' : ''}" data-tag="${escapeHtml(t)}" aria-pressed="${selectedTags.has(t)}">${escapeHtml(t)}</button>`).join('')}</div><div class="sources">${sourceLinks}<br>${escapeHtml(e.path)}</div></article>`;
+  return `<article class="card"><div class="kicker"><span class="badge strong">${escapeHtml(e.type)}</span><span class="badge">${escapeHtml(e.town)}</span><span class="badge">${escapeHtml(e.status)}</span>${e.scope && e.scope !== 'core' ? `<span class="badge">${escapeHtml(e.scope)}</span>` : ''}</div><h2>${escapeHtml(e.title)}</h2><div class="details">${date ? `<strong>${escapeHtml(date)}</strong><br>` : ''}${escapeHtml(e.timing || e.time || 'Year-round / see details')}<br>${escapeHtml(e.address || '')}</div><div class="desc">${escapeHtml(e.description_short || e.body_preview || '')}</div><div class="sources">${sourceLinks}<br>${escapeHtml(e.path)}</div></article>`;
 }
 function matchingRows(ignoreTown=false) {
   const q=byId('q').value.trim().toLowerCase();
-  return DATA.filter(e => (!activeType || e.type === activeType) && (ignoreTown || !activeTown || e.town === activeTown) && [...selectedTags].every(tag => (e.tags||[]).includes(tag)) && (!q || JSON.stringify(e).toLowerCase().includes(q)));
+  return DATA.filter(e => (!activeType || e.type === activeType) && (ignoreTown || !activeTown || e.town === activeTown) && (!q || JSON.stringify(e).toLowerCase().includes(q)));
 }
 function renderMap(rowsForPins, rows) {
   const grouped = new Map();
@@ -414,19 +401,9 @@ function render() {
   renderCalendar(rows);
   updateTabs();
 }
-function toggleTag(tag) {
-  if (selectedTags.has(tag)) selectedTags.delete(tag);
-  else selectedTags.add(tag);
-  renderTagOptions();
-  render();
-}
 byId('q').addEventListener('input', render);
 document.querySelectorAll('[data-type-tab]').forEach(button => button.addEventListener('click', () => { activeType = button.dataset.typeTab; render(); }));
 document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => { viewMode = button.dataset.view; render(); }));
-byId('clearTags').addEventListener('click', () => { selectedTags.clear(); renderTagOptions(); render(); });
-byId('tagOptions').addEventListener('click', event => { const button = event.target.closest('[data-tag]'); if (button) toggleTag(button.dataset.tag); });
-byId('selectedTags').addEventListener('click', event => { const button = event.target.closest('[data-tag]'); if (button) toggleTag(button.dataset.tag); });
-byId('cards').addEventListener('click', event => { const button = event.target.closest('[data-tag]'); if (button) toggleTag(button.dataset.tag); });
 byId('mapContent').addEventListener('click', event => {
   const button = event.target.closest('[data-town]');
   if (button) {
@@ -446,7 +423,6 @@ byId('mapContent').addEventListener('keydown', event => {
     }
   }
 });
-renderTagOptions();
 updateTabs();
 render();
 </script>
