@@ -1,42 +1,43 @@
 ---
-title: "Hart Square Heritage Festival 2026"
+title: "Hart Square Fall Heritage Festival 2026 (41st Annual)"
 type: event
 town: newton
-county: "Catawba"
-address: "Hart Square Village, 7098 Coley Road SW, Newton, NC"
-date_start: 
-date_end: 
-time: ""
-timing: "One Saturday in October 2026, historically mid-October"
-season: 
+county: "Catawba/Lincoln"
+address: "Hart Square Village, 5055 Hope Road, Vale, NC 28168"
+date_start: 2026-10-24
+date_end: 2026-10-24
+time: "10am-5pm"
+timing: "Saturday, October 24, 2026, 10am-5pm"
+season: fall
 scope: core
 tags: ["historic", "art", "music", "outdoor", "seasonal", "photography", "farm-animals", "tractors"]
-cost: 
+cost: "Adults $50; Youth 13-18 $25; Children 12 & under free (separate event ticket required; day passes not valid)"
 dog_friendly: "unknown"
-description_short: "One-day heritage festival at a 200-acre historic village with 103 log structures, 300+ demonstrators, Appalachian music, crafts, blacksmithing, weaving, apple butter, cider pressing, and strong photography value."
-source_urls: ["https://hartsquare.com/product/41st-fall-heritage-festival", "https://www.visithickorync.com/events/annual-events/hart-square-heritage-festival/"]
-status: needs-confirmation
-confidence: medium-high
+description_short: "41st annual one-day heritage festival at Hart Square Village, with all 103 historic log structures open and 300+ period-dressed artisans/demonstrators doing flax making, cotton baling, tinsmithing, apple butter making, blacksmithing, weaving, and old-time music."
+source_urls: ["https://hartsquare.com/product/41st-fall-heritage-festival/", "https://www.visithickorync.com/events/annual-events/hart-square-heritage-festival/"]
+status: confirmed
+confidence: high
 ---
 
-# Hart Square Heritage Festival 2026
+# Hart Square Fall Heritage Festival 2026 (41st Annual)
 
-One-day heritage festival at a 200-acre historic village with 103 log structures, 300+ demonstrators, Appalachian music, crafts, blacksmithing, weaving, apple butter, cider pressing, and strong photography value.
+41st annual one-day heritage festival at Hart Square Village, with all 103 historic log structures open and 300+ period-dressed artisans/demonstrators doing flax making, cotton baling, tinsmithing, apple butter making, blacksmithing, weaving, and old-time music. This is this weekend (Saturday, October 24, 2026).
 
 ## Logistics
 
 - **Nearest town folder:** newton
-- **County:** Catawba
-- **Venue/location:** Hart Square Village, 7098 Coley Road SW, Newton, NC
-- **Timing:** One Saturday in October 2026, historically mid-October
+- **County:** Catawba/Lincoln (Vale straddles both; property extends into western Catawba County)
+- **Venue/location:** Hart Square Village, 5055 Hope Road, Vale, NC 28168
+- **Timing:** Saturday, October 24, 2026, 10am-5pm
+- **Cost:** Adults $50; Youth 13-18 $25; Children 12 & under free. A separate event ticket is required — general day passes are not valid for entry on festival day.
 - **Dog-friendly note:** unknown
 
 ## Notes
 
-Verify current-year details before making plans when status is expected, needs-confirmation, or confirmed-pattern.
+Tickets are sold directly through Hart Square's ticketing platform, linked from the official event page. Confirmed directly from hartsquare.com on Oct 22, 2026.
 
 ## Source checks
 
-- https://hartsquare.com/product/41st-fall-heritage-festival
+- https://hartsquare.com/product/41st-fall-heritage-festival/
 - https://www.visithickorync.com/events/annual-events/hart-square-heritage-festival/
 

@@ -45,6 +45,7 @@ Create a new town/community folder when a source identifies that place as the ve
 | `beech-mountain` | Beech Mountain | Avery/Watauga | High-country summer markets, crafts, and seasonal outdoor events |
 | `newton` | Newton | Catawba | Hart Square, folk art, pottery, and Catawba County heritage events |
 | `catawba` | Catawba | Catawba | Murray's Mill and rural Catawba County heritage events |
+| `conover` | Conover | Catawba | Foothills Antique Power Association home base, near Newton/Hickory |
 | `weaverville` | Weaverville | Buncombe | Asheville-area anchor town north of Asheville |
 
 ## Asheville region (added by explicit user request, September 2026)
