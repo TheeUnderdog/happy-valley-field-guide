@@ -29,6 +29,7 @@ Create a new town/community folder when a source identifies that place as the ve
 | `hickory` | Hickory | Catawba | Regional metro anchor |
 | `boone` | Boone | Watauga | High Country hub |
 | `deep-gap` | Deep Gap | Watauga | Parkway / Doc Watson / US-421 corridor |
+| `valle-crucis` | Valle Crucis | Watauga | Unincorporated community on NC-194 between Boone and Banner Elk; Valle Crucis Community Park, Original Mast General Store |
 | `banner-elk` | Banner Elk | Avery | Woolly Worm, ski/resort seasonal activity |
 | `newland` | Newland | Avery | Avery county-seat/gateway folder |
 | `linville` | Linville | Avery/Burke | Linville Falls/Gorge and resort community |
@@ -36,6 +37,7 @@ Create a new town/community folder when a source identifies that place as the ve
 | `north-wilkesboro` | North Wilkesboro / Wilkesboro | Wilkes | Speedway, MerleFest, Wilkes events |
 | `ferguson` | Ferguson | Wilkes | Yadkin Valley / NC-268 community; use for Whippoorwill Academy and Village |
 | `taylorsville` | Taylorsville | Alexander | Brushy Mountain/agriculture corridor |
+| `denton` | Denton | Davidson | Denton FarmPark and Southeast Old Threshers Reunion anchor |
 | `statesville` | Statesville | Iredell | Eastern boundary anchor |
 | `west-jefferson` | West Jefferson | Ashe | Boundary-stretch day-trip anchor |
 | `marion` | Marion | McDowell | Outer-boundary festival/day-trip town for Bigfoot, livermush, gold, July 4, and McDowell events |

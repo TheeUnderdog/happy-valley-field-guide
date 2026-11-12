@@ -14,7 +14,7 @@ tags: ["music", "free", "outdoor", "live-music"]
 cost: 
 dog_friendly: "generally yes"
 description_short: "Free Friday evening outdoor music series in downtown Boone with folk, roots, acoustic, and regional performers."
-source_urls: ["https://www.joneshouseboone.com/", "https://highcountryhost.com/High-Country-Events-Calendar"]
+source_urls: ["https://www.joneshouseboone.com/", "https://highcountryhost.com/High-Country-Events-Calendar", "https://www.boonedays.com/vibe/live-music-boone"]
 status: confirmed-pattern
 confidence: high
 ---
