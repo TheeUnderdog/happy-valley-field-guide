@@ -3,11 +3,11 @@ title: "Window World 450 at North Wilkesboro Speedway"
 type: event
 town: north-wilkesboro
 county: "Wilkes"
-address: "North Wilkesboro Speedway, 1 Speedway Boulevard, North Wilkesboro, NC 28659"
+address: "North Wilkesboro Speedway, 381 Speedway Lane, North Wilkesboro, NC 28659"
 date_start: 
 date_end: 
 time: ""
-timing: "Summer annual pattern; 2027 date TBD"
+timing: "2027: All-Star Race weekend May 21-23 (no points race announced as of Aug 2026)"
 season: 
 scope: core
 tags: ["cars", "outdoor", "seasonal", "photography"]
@@ -27,13 +27,13 @@ NASCAR Cup race pattern at North Wilkesboro Speedway; the 2026 Window World 450 
 
 - **Nearest town folder:** north-wilkesboro
 - **County:** Wilkes
-- **Venue/location:** North Wilkesboro Speedway, 1 Speedway Boulevard, North Wilkesboro, NC 28659
-- **Timing:** Summer annual pattern; 2027 date TBD
+- **Venue/location:** North Wilkesboro Speedway, 381 Speedway Lane, North Wilkesboro, NC 28659
+- **Timing:** 2027: All-Star Race weekend May 21-23 (no points race announced as of Aug 2026)
 - **Dog-friendly note:** varies by race policy
 
 ## Notes
 
-2026 race is past; monitor NWS schedule for 2027.
+2026 race is past. NASCAR's 2027 schedule (announced Aug 2026) puts the All-Star Race here on May 23, 2027 and lists no points-paying Cup race at North Wilkesboro. See nascar-all-star-weekend-north-wilkesboro-2027 for the 2027 weekend.
 
 ## Source checks
 
