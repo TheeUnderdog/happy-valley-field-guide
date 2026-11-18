@@ -389,7 +389,7 @@ function renderCalendar(rows) {
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(e);
   }
-  const html = [...groups.entries()].map(([month, items]) => `<section class="calendar-group"><h2 class="calendar-month">${escapeHtml(month)}</h2><div class="calendar-list">${items.map(e => `<article class="calendar-item"><strong>${escapeHtml(formatDateRange(e.date_start, e.date_end))}</strong><br>${escapeHtml(e.title)}<br><span class="details">${escapeHtml(e.town)} · ${escapeHtml(e.timing || '')}</span></article>`).join('')}</div></section>`).join('');
+  const html = [...groups.entries()].map(([month, items]) => `<section class="calendar-group"><h2 class="calendar-month">${escapeHtml(month)}</h2><div class="calendar-list">${items.map(e => { const sourceLinks = (e.source_urls || []).slice(0,3).map((s,i)=>`<a href="${escapeHtml(s)}">source ${i+1}</a>`).join(' · '); return `<article class="calendar-item"><strong>${escapeHtml(formatDateRange(e.date_start, e.date_end))}</strong><br>${escapeHtml(e.title)}<br><span class="details">${escapeHtml(e.town)} · ${escapeHtml(e.timing || '')}</span>${sourceLinks ? `<br><span class="sources">${sourceLinks}</span>` : ''}</article>`; }).join('')}</div></section>`).join('');
   byId('calendarContent').innerHTML = html || '<p>No dated events match the current filters.</p>';
   if (undated) byId('calendarContent').insertAdjacentHTML('beforeend', `<p class="details">${undated} matching event${undated === 1 ? '' : 's'} have no exact date yet and are not shown on the calendar.</p>`);
 }
