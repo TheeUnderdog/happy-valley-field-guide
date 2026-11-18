@@ -3,7 +3,7 @@ title: "Light Up Lenoir 2026 (20th Annual)"
 type: event
 town: lenoir
 county: "Caldwell"
-address: "Downtown Lenoir, 801 West Ave NW, Lenoir, NC 28645"
+address: "Downtown Lenoir Square, Lenoir, NC 28645"
 date_start: 2026-11-19
 date_end: 2026-11-19
 time: "5-8pm"
@@ -16,7 +16,7 @@ dog_friendly:
 description_short: "Downtown Lenoir's 20th annual holiday tree lighting kickoff with performances by local schools and dance studios, Christmas lights and shopping at downtown businesses."
 source_urls: ["https://downtownlenoirnc.com/about/calendar/", "https://allevents.in/lenoir-nc", "https://cdnc.heyzine.com/flip-book/pdf/ad20ead1f0955ef88661fc081cf4afa19cfba6aa-5.pdf"]
 status: confirmed
-confidence: medium-high
+confidence: high
 ---
 
 # Light Up Lenoir 2026 (20th Annual)
@@ -27,7 +27,7 @@ Downtown Lenoir's 20th annual holiday tree lighting kickoff with performances by
 
 - **Nearest town folder:** lenoir
 - **County:** Caldwell
-- **Venue/location:** Downtown Lenoir, 801 West Ave NW, Lenoir, NC 28645
+- **Venue/location:** Downtown Lenoir Square, Lenoir, NC 28645
 - **Timing:** Thursday, November 19, 2026, 5-8pm
 - **Cost:** Free
 
