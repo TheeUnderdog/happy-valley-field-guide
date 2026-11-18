@@ -33,7 +33,7 @@ Expected annual Christmas parade through downtown Lenoir with local community pa
 
 ## Notes
 
-Verify current-year details before making plans when status is expected, needs-confirmation, or confirmed-pattern.
+Pattern note: see also Lenoir holiday events added Nov 2026 (Foothills Pops, Jason Crabb, Dirty Santa Trail Run). Verify current-year details before making plans when status is expected, needs-confirmation, or confirmed-pattern.
 
 ## Source checks
 
